@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象-独行冰海</title>
+</head>
+<body>
+    <script>
+    function createPerson(username, blogsrc, weibo){
+        // 原料的投入
+        //var user = new Object();
+        // 加工过程的开始
+        this.username = username;
+        this.blogsrc = blogsrc;
+        this.weibo = weibo;
+        this.showInf = function (){
+            alert('姓名:'+this.username+'\n博客地址:'+this.blogsrc+'\n微博地址:'+this.weibo);
+        }
+        // 加工过程的结束
+        // 成品出厂
+       // return user;
+    }
+    createPerson.prototype.showInf=function(){
+        alert('姓名:'+this.username+'\n博客地址:'+this.blogsrc+'\n微博地址:'+this.weibo);
+    }
+
+
+    var user1 =new createPerson('独行冰海', 'http://blog.163.com/hongshaoguoguo@126', 'http://weibo.com/u/2706684357');
+    console.log(user1.showInf);
+    var user2 =new createPerson('独行冰海', 'http://blog.163.com/hongshaoguoguo@126', 'http://weibo.com/u/2706684357');
+    console.log(user2.showInf);
+    console.log(user1.showInf == user2.showInf);
+    </script>
+</body>
+</html>

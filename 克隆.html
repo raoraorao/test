@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+   	<script>
+   		var arr=["1","2","3"];
+
+   		function clone(targetObj){
+   			
+   			if(targetObj instanceof Array){
+   				return targetObj.concat();
+   			}else if(targetObj instanreof Object){
+   			 	var newObj={};
+   			 	for (var i in targetObj){
+   			 		newObj[i]=targetObj[i];
+   			 	}
+   			 	return newObj;
+   			}else{
+   				return targetObj;
+   			}
+   		}
+
+   		var result =clone(arr);
+   	</script>
+    </head>
+ <body>
+ 	
+ </body>
+ </html>

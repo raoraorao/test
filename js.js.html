@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<input type="text" value="改变属性" id="swerch">
+<div id="red">dfsdfas</div>
+<script>
+    document.getElementById("swerch").type = "button";
+    var aaa=document.getElementById("red").style.color="red"
+
+    if(aaa){
+        alert("true")
+    }else{
+        alert("false")
+    }
+
+
+    var dog={
+        "name":"haha",
+        "sex":"man",
+        "varieties":18
+    }
+
+   // var ss=new dog();
+   // console.log(ss);
+
+ for (i in dog){
+        document.write("属性"+i+":"+dog[i])
+    }
+    var cat={
+        "name":"dfasdf",
+        "age":18,
+        "color":"yellow"
+    }
+
+
+    delete cat.name;//删除属性
+    cat.age=undefined;
+    cat.color=null;
+    console.log("name属性是否存在:"+cat.hasOwnProperty("name"))
+    console.warn("name属性是否存在:"+cat.hasOwnProperty("age"))
+
+</script>
+</body>
+</html>

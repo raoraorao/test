@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>联式运动</title>
+    <style>
+        .box{width:200px;height:200px;background:red}
+        .box2{width:200px;height:200px;background:greenyellow}
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box2"></div>
+    <script>
+        window.onload=function(){
+            var $box=document.getElementsByTagName("div");
+            for(var i=0 ; i<$box.length ; i++){
+                $box[i].timer=null;
+                $box[i].onmouseover=function(){
+                    var $this=this;
+                    startMove(this,"width",400,function(){
+                        //js this对象不能传入function 需要通过变量 $this=this传入
+                        startMove($this,"height",400)
+                    })
+                }
+                $box[i].onmouseout=function(){
+                    var $this=this;
+                    startMove(this,"height",200,function(){
+                        startMove($this,"width",200)
+                    })
+                }
+            }
+
+            //动作函数
+            function startMove(obj,attr,target,fn){
+                clearInterval(obj.timer);
+                obj.timer=setInterval(function(){
+                    //速度(移动的距离)
+                    var speed=(target-getstyle(obj,attr))/5;
+                    //正负取值 正取最大整数 负取最小整数
+                    speed=speed>0? Math.ceil(speed): Math.floor(speed);
+                    if(getstyle(obj,attr)==target){
+                        //到达目标位置 停止循环
+                        clearInterval(obj.timer);
+                        if(fn){
+                            //后续动作
+                            fn();
+                        }
+                    }else{
+                        //没有到达目标 继续改变
+                        obj.style[attr]=getstyle(obj,attr)+speed+"px";
+                    }
+                },30)
+            }
+            //获取样式数值
+            function getstyle(obj,attr){
+                if(obj.currentStyle){
+                    return parseFloat(obj.currentStyle[attr])
+                }else{
+                    return parseFloat(getComputedStyle(obj,false)[attr])
+                }
+            }
+        }
+    </script>
+</body>
+</html>

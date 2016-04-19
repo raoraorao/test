@@ -1,0 +1,55 @@
+//haha
+/*哈哈*/
+@300px:300px;
+.red{border:1px solid red }
+.border_radius(@radius:5px){
+  -webkit-border-radius:@radius;
+  -moz-border-radius:@radius;
+  border-radius:@radius;
+}
+
+.font_size(@size:10px,@color:red){
+  font-size:@size
+}
+body{}
+.box{background:green;width:@300px;height:@300px;.red;.font_size();.border_radius(10px)}
+
+.sanjiao(top,@wid:5px,@color){
+  border:@wid transparent dashed;border-bottom:@wid @color solid;cursor:pointer
+  }
+.sanjiao(left,@wid:5px,@color){
+  border:@wid transparent dashed;border-right:@wid @color solid;cursor:pointer
+  }
+.sanjiao(bottom,@wid:5px,@color){
+  border:@wid transparent dashed;border-top:@wid @color solid;cursor:pointer
+  }
+.sanjiao(right,@wid:5px,@color){
+ border:@wid transparent dashed;border-left:@wid @color solid;cursor:pointer
+  }
+.sanjiao(@_,@wid:5px,@color){
+  width:0;height:0;overflow:hidden;
+  }
+.haha{
+  .sanjiao(right,5px,black)
+  }
+.clearfix{
+  &:after{
+    content:"";
+    display:block;
+    clear:both;
+
+    }
+  }
+
+ul{background:red;display:block;.clearfix;
+   li{display:inline-block; line-height:50px;font-size:16px;float:left;background:#ededed;margin-left:10px;height:50px}
+
+  }
+
+.border(@w:2px,@s:solid,@c:green){
+  border:@arguments;
+  }
+.box2{width:50px;height:30px;.border(50px);background:red;}
+
+
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .content{background:green;width:1000px;height:100px;position:absolute;top:0;left:-1000px}
+        .content .btn{width:30px;height:40px;position:absolute;left:1000px;top:50%;margin-top:-20px;background:red;cursor:pointer}
+    </style>
+    <script>
+        window.onload=function(){
+            var $content=document.getElementsByClassName("content")[0];
+            var $btn=document.getElementsByClassName("btn")[0];
+            $btn.onclick=function(){
+                if($content.offsetLeft==-1000){
+                    moveStart(0);
+                }else if($content.offsetLeft>=0){
+                    moveStart(-1000);
+                }
+            }
+            var time;
+            function moveStart(Target){
+                clearInterval(time);
+
+                time=setInterval(function(){
+                    var $speed=(Target-$content.offsetLeft)/5;
+                    $speed= $speed>0 ? Math.ceil($speed) : Math.floor($speed);
+                    console.log($speed);
+                    if($content.offsetLeft==Target){
+                        clearInterval(time);
+                    }else{
+                        $content.style.left=$content.offsetLeft+$speed+"px";
+                    }
+
+                },30)
+            }
+
+            //获取元素style的方法
+            function getstyle(obj,attr){
+                if(obj.currentStyle){
+                    return obj.currentStyle[attr];
+                }else{
+                    return getComputedStyle(obj,false)[attr]
+                }
+            }
+            alert(getstyle($content,"width"))
+        }
+    </script>
+</head>
+<body>
+    <div class="content">
+        <span class="btn"></span>
+    </div>
+
+</body>
+</html>

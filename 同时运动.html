@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>同时运动</title>
+    <style>
+        .box{width:200px;height:200px;background:red;opacity:0.5}
+        .box2{width:200px;height:200px;background:violet;opacity:0.5}
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box2"></div>
+    <script>
+        window.onload=function(){
+            var $box=document.getElementsByTagName("div");
+            for(var i=0 ; i<$box.length ; i++){
+                $box[i].timer=null;
+                $box[i].onmouseover=function(){
+                    startMove(this,{width:400,height:400,opacity:100})
+                }
+                $box[i].onmouseout=function(){
+                    startMove(this,{width:200,height:200,opacity:50})
+                }
+            }
+
+            //动作函数
+            function startMove(obj,attrClass){
+                clearInterval(obj.timer);
+                obj.timer=setInterval(function(){
+                    //速度(移动的距离)
+                    for( key in attrClass){
+                        var speed=(attrClass[key]-getstyle(obj,key))/5;
+                        //正负取值 正取最大整数 负取最小整数
+                        speed=speed>0? Math.ceil(speed): Math.floor(speed);
+                        if(getstyle(obj,key)==attrClass[key]){
+                            //到达目标位置 停止循环
+                            clearInterval(obj.timer);
+                        }else{
+                            //没有到达目标 继续改变
+                            if(key=="opacity"){
+                                obj.style[key]=(getstyle(obj,key)+speed)/100;
+                            }else{
+                                obj.style[key]=getstyle(obj,key)+speed+"px";
+                            }
+
+                        }
+                    }
+
+                },30)
+            }
+
+            //获取样式数值
+            function getstyle(obj,attr){
+                if(obj.currentStyle){
+                    if(attr=="opacity"){
+                        return parseFloat(obj.currentStyle[attr])*100;
+                    }else{
+                        return parseFloat(obj.currentStyle[attr]);
+                    }
+                }else{
+                    if(attr=="opacity"){
+                        return parseFloat(getComputedStyle(obj,false)[attr])*100;
+                    }else{
+                        return parseFloat(getComputedStyle(obj,false)[attr]);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
